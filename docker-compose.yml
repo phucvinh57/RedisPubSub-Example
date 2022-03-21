@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  publisher:
+    image: node:17-alpine
+    command: sh -c "node index.js"
+    working_dir: /publisher
+    volumes:
+      - ./:./db.txt
+
+volumes:
+  db:
