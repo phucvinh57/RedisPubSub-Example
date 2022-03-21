@@ -1,8 +1,13 @@
 version: '3.8'
 services:
-  publisher:
-    image: node:17-alpine
-    command: sh -c "node index.js"
-    working_dir: ./publisher
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - 6379:6379
     volumes:
-      - ./publisher:./
+      - cache:./
+
+volumes:
+  cache:
+    driver: local
+
