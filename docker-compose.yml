@@ -5,7 +5,8 @@ services:
     build:
       context: ./publisher
       dockerfile: Dockerfile
-    network_modes: bridge
+    depends_on:
+      - cache
     volumes:
       - db:/usr/src/app
     restart: unless-stopped
@@ -15,7 +16,8 @@ services:
     build: 
       context: ./subscriber_1
       dockerfile: Dockerfile
-    network_modes: bridge
+    depends_on:
+      - cache
     volumes:
       - db:/usr/src/app
     restart: unless-stopped
@@ -25,7 +27,8 @@ services:
     build: 
       context: ./subscriber_2
       dockerfile: Dockerfile
-    network_modes: bridge
+    depends_on:
+      - cache
     volumes:
       - db:/usr/src/app
     restart: unless-stopped
@@ -33,7 +36,6 @@ services:
   cache:
     container_name: cache
     image: redis:alpine
-    network_modes: bridge
     restart: unless-stopped
   
 volumes:
