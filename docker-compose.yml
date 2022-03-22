@@ -6,19 +6,28 @@ services:
       - 4000:6379
     restart: always
   pub:
-    build: ./publisher
+    build:
+      context: . 
+      dockerfile: ./publisher/Dockerfile
     volumes:
       - db:/usr/src/app
     restart: always
+
   sub_1:
-    build: ./subscriber_1
+    build:
+      context: . 
+      dockerfile: ./subscriber_1/Dockerfile
     volumes:
       - db:/usr/src/app
     restart: always
+
   sub_2:
-    build: ./subscriber_2
+    build:
+      context: . 
+      dockerfile: ./subscriber_2/Dockerfile
     volumes:
       - db:/usr/src/app
     restart: always
+
 volumes:
   db:
