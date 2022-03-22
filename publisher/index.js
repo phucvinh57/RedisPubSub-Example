@@ -5,7 +5,7 @@ const util = require('util')
 const MINUTE_INTERVAL = 0.05;
 const MSG = " can reload data."
 
-const publisher = new Redis()
+const publisher = new Redis('http://127.17.0.2')
 const write = util.promisify(fs.writeFile.bind(fs))
 
 const id = setInterval(async () => {
