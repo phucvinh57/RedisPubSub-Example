@@ -1,24 +1,28 @@
 version: '3.8'
 services:
   cache:
+    container_name: cache
     image: redis:6.2-alpine
     ports:
-      - 4000:6379
+      - 6379:6379
     restart: always
 
   pub:
+    container_name: pub
     build: ./publisher
     volumes:
       - db:/usr/src/app
     restart: always
 
   sub_1:
+    container_name: sub_1
     build: ./subscriber_1
     volumes:
       - db:/usr/src/app
     restart: always
 
   sub_2:
+    container_name: sub_2
     build: ./subscriber_2
     volumes:
       - db:/usr/src/app
