@@ -28,4 +28,17 @@ As you can see, we have three processes running now:
 
 ## Deploy
 
-Deploy
+This project must be deployed on Linux operating system.
+Please install **docker**, **docker-compose** before deploying.
+
+In the project directory, run the command below to build and run all images in background mode:
+
+```console
+docker-compose up -d --build
+```
+
+If you want to stop the entire system (include volume), run this command:
+
+```command
+docker-compose down --volume
+```
