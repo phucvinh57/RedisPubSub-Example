@@ -1,7 +1,7 @@
 const Redis = require('ioredis')
 const fs = require('fs')
 
-const subscriber = new Redis('http://127.17.0.2')
+const subscriber = new Redis('172.17.0.2')
 
 subscriber.subscribe('article', (err, count) => {
     if (err) {
