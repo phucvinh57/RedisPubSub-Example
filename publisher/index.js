@@ -1,20 +1,18 @@
-const redis = require('redis')
+const Redis = require('ioredis')
 const fs = require('fs')
 const util = require('util')
 
-const MINUTE_INTERVAL = 1;
+const MINUTE_INTERVAL = 0.05;
+const MSG = " can reload data."
 
+const publisher = new Redis()
 const write = util.promisify(fs.writeFile.bind(fs))
-const publisher = redis.createClient()
 
-const publish = async () => {
-    let msg = " can reload data."
-    await publisher.connect();
-
-    setInterval(async () => {
+const id = setInterval(async () => {
+    try {
         await write('../db.txt', new Date().toLocaleTimeString())
-        await publisher.publish('article', JSON.stringify(msg));
-    }, 1000 * 60 * MINUTE_INTERVAL)
-}
-
-publish()
+        await publisher.publish('article', MSG)
+    } catch (err) {
+        clearInterval(id)
+    }
+}, 1000 * 60 * MINUTE_INTERVAL)
