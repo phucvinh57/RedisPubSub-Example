@@ -1,7 +1,7 @@
 const Redis = require('ioredis')
 const fs = require('fs')
 
-const subscriber = new new Redis('cache')
+const subscriber = new Redis('cache')
 
 subscriber.subscribe('article', (err, count) => {
     if (err) {
