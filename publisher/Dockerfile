@@ -1,6 +1,6 @@
 FROM node:16-alpine
 
-# Create app directory
+# Create app directory (virtual path in container)
 WORKDIR /usr/src/app
 
 # Install app dependencies

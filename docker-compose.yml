@@ -1,13 +1,24 @@
 version: '3.8'
 services:
-  redis:
+  cache:
     image: redis:6.2-alpine
     ports:
-      - 6379:6379
+      - 4000:6379
+    restart: always
+  pub:
+    build: ./publisher
     volumes:
-      - cache:./
-
+      - db:/usr/src/app
+    restart: always
+  sub_1:
+    build: ./subscriber_1
+    volumes:
+      - db:/usr/src/app
+    restart: always
+  sub_2:
+    build: ./subscriber_2
+    volumes:
+      - db:/usr/src/app
+    restart: always
 volumes:
-  cache:
-    driver: local
-
+  db:
