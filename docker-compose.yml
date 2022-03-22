@@ -5,26 +5,21 @@ services:
     ports:
       - 4000:6379
     restart: always
+
   pub:
-    build:
-      context: . 
-      dockerfile: ./publisher/Dockerfile
+    build: ./publisher
     volumes:
       - db:/usr/src/app
     restart: always
 
   sub_1:
-    build:
-      context: . 
-      dockerfile: ./subscriber_1/Dockerfile
+    build: ./subscriber_1
     volumes:
       - db:/usr/src/app
     restart: always
 
   sub_2:
-    build:
-      context: . 
-      dockerfile: ./subscriber_2/Dockerfile
+    build: ./subscriber_2
     volumes:
       - db:/usr/src/app
     restart: always
