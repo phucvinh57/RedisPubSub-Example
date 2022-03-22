@@ -1,35 +1,40 @@
-version: '3.8'
+version: '3.7'
 services:
-  cache:
-    container_name: cache
-    image: redis:alpine
-    ports:
-      - 6379:6379
-    restart: always
-
   pub:
     container_name: pub
     build:
       context: ./publisher
       dockerfile: Dockerfile
+    network_modes: bridge
     volumes:
-      - ./publisher:/usr/src/app
-    restart: always
+      - db:/usr/src/app
+    restart: unless-stopped
 
   sub_1:
     container_name: sub_1
     build: 
       context: ./subscriber_1
       dockerfile: Dockerfile
+    network_modes: bridge
     volumes:
-      - ./publisher:/usr/src/app
-    restart: always
+      - db:/usr/src/app
+    restart: unless-stopped
 
   sub_2:
     container_name: sub_2
     build: 
       context: ./subscriber_2
       dockerfile: Dockerfile
+    network_modes: bridge
     volumes:
-      - ./publisher:/usr/src/app
-    restart: always
+      - db:/usr/src/app
+    restart: unless-stopped
+
+  cache:
+    container_name: cache
+    image: redis:alpine
+    network_modes: bridge
+    restart: unless-stopped
+  
+volumes:
+  db:
