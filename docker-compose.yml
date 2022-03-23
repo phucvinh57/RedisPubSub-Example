@@ -11,7 +11,7 @@ services:
       - db:/usr/src/app
     restart: unless-stopped
     ports:
-      -4000:4000
+      - 4000:4000
 
   sub_1:
     container_name: sub_1
@@ -24,7 +24,7 @@ services:
       - db:/usr/src/app
     restart: unless-stopped
     ports:
-      -4001:4001
+      - 4001:4001
 
   sub_2:
     container_name: sub_2
@@ -37,7 +37,7 @@ services:
       - db:/usr/src/app
     restart: unless-stopped
     ports:
-      -4002:4002
+      - 4002:4002
 
   cache:
     container_name: cache
