@@ -1,3 +1,7 @@
+const express = require('express')
+const port = 4000
+const app = express()
+
 const Redis = require('ioredis')
 const fs = require('fs')
 const util = require('util')
@@ -13,6 +17,10 @@ const id = setInterval(async () => {
         await write('../db.txt', new Date().toLocaleTimeString())
         await publisher.publish('article', MSG)
     } catch (err) {
-        clearInterval(id)
+        clearInterval(id) 
     }
 }, 1000 * 60 * MINUTE_INTERVAL)
+
+app.listen(port, function () {
+    console.log(`Server ModbusTCP listening on port ${port}!`)
+})

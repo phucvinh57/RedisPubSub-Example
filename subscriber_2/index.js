@@ -1,3 +1,7 @@
+const express = require('express')
+const port = 4002
+const app = express()
+
 const Redis = require('ioredis')
 const fs = require('fs')
 
@@ -16,3 +20,7 @@ subscriber.on("message", (channel, message) => {
     let data = fs.readFileSync('../db.txt', 'utf-8')
     console.log(data)
 });
+
+app.listen(port, function () {
+    console.log(`Server ModbusTCP listening on port ${port}!`)
+})
