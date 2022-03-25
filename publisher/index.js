@@ -14,7 +14,7 @@ const write = util.promisify(fs.writeFile.bind(fs))
 
 const id = setInterval(async () => {
     try {
-        await write('../db.txt', new Date().toLocaleTimeString())
+        await write('../app/db.txt', new Date().toLocaleTimeString())
         await publisher.publish('article', MSG)
     } catch (err) {
         clearInterval(id) 

@@ -17,7 +17,7 @@ subscriber.subscribe('article', (err, count) => {
 
 subscriber.on("message", (channel, message) => {
     console.log("Subcriber 1" + message);
-    let data = fs.readFileSync('../db.txt', 'utf-8')
+    let data = fs.readFileSync('../app/db.txt', 'utf-8')
     console.log(data)
 });
 
